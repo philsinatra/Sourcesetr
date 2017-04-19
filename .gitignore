@@ -39,7 +39,6 @@ ehthumbs.db
 Thumbs.db
 
 # Custom #
-*.jpg
-*.png
 -sourcesetter.txt
 sourcesetter.config
+graphics

@@ -2,10 +2,10 @@
 
 i=0
 sizes=(1800 1600 1200 900 600 300 100)
-config="./sourcesetter.config"
+config="./sourcesetr.config"
 instance="`date +%Y%m%d%H%M%S`"
 export_location=exports-"$instance"
-details="$export_location"/-sourcesetter.txt
+details="$export_location"/-sourcesetr.txt
 
 # Check if config file exists
 if [ -f "$config" ];
@@ -20,7 +20,7 @@ fi
 # Create a directory for exports
 mkdir -p $export_location
 # Create the detailed information text file
-echo -e "Source Setter\n" > $details
+echo -e "Sourcesetr\n" > $details
 
 
 # Find all .jpg files in the current directory
