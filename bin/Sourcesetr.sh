@@ -5,7 +5,6 @@ config="./sourcesetr.config"
 while getopts ":c" opt; do
   case $opt in
     c)
-      # echo "-c was triggered!" >&2
       echo ""
       echo ""
       echo "**********************************************"
@@ -40,25 +39,17 @@ export_location=exports-"$instance"
 details="$export_location"/-sourcesetr.txt
 
 
-# Check if config file exists
 if [ -f "$config" ];
 then
-  # Use existing config file
   source $config
 else
-  # Create a new config file
   echo 'sizes=(1800 1600 1200 900 600 300 100)' > $config
 fi
 
-# Create a directory for exports
 mkdir -p $export_location
-# Create the detailed information text file
 echo -e "Sourcesetr\n" > $details
 
 
-# Find all .jpg files in the current directory
-# find . -name '*.jpg' -o -name '*.png'
-# find . -name '*.jpg' -o -name '*.png' | while IFS= read -r FILE;
 find . -name '*.jpg' -maxdepth 1 | while IFS= read -r FILE;
 do
   basename=${FILE##*/}
@@ -67,7 +58,7 @@ do
   while [ $i -lt ${#sizes[@]} ];
   do
     echo "  <source media=\"(min-width: ${sizes[$i]}px)\" srcset=\"$filename-${sizes[$i]}.jpg 1x, $filename-${sizes[$i]}@2x.jpg 2x\">" >> $details
-    # Export sourceset files
+
     cp "$basename" $export_location/"$filename"-${sizes[$i]}.jpg
     sips -Z ${sizes[$i]} $export_location/"$filename"-${sizes[$i]}.jpg
     cp "$basename" $export_location/"$filename"-${sizes[$i]}@2x.jpg
@@ -82,7 +73,6 @@ done
 i=0
 
 
-# Find all .png files in the current directory
 find . -name '*.png' -maxdepth 1 | while IFS= read -r FILE;
 do
   basename=${FILE##*/}
@@ -91,7 +81,7 @@ do
   while [ $i -lt ${#sizes[@]} ];
   do
     echo "  <source media=\"(min-width: ${sizes[$i]}px)\" srcset=\"$filename-${sizes[$i]}.png 1x, $filename-${sizes[$i]}@2x.png 2x\">" >> $details
-    # Export sourceset files
+
     cp "$basename" $export_location/"$filename"-${sizes[$i]}.png
     sips -Z ${sizes[$i]} $export_location/"$filename"-${sizes[$i]}.png
     cp "$basename" $export_location/"$filename"-${sizes[$i]}@2x.png
