@@ -1,11 +1,44 @@
 #!/bin/bash
 
+config="./sourcesetr.config"
+
+while getopts ":c" opt; do
+  case $opt in
+    c)
+      # echo "-c was triggered!" >&2
+      echo ""
+      echo ""
+      echo "**********************************************"
+      echo "* Creating SourceSetr config file..."
+      echo "* Enter the 'width' values you want to include"
+      echo "* in the config file."
+      echo "* Seperate each value with a space."
+      echo ""
+      echo "* Example: "
+      echo "1200 600 300"
+      echo "**********************************************"
+
+      read -p "SourceSetr Width Values: "  widthValues
+      echo "sizes=($widthValues)" > $config
+      echo "sourcesetr.config established:"
+      echo "sizes=($widthValues)"
+      echo ""
+
+      exit 0
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+  esac
+done
+
+
 i=0
 sizes=(1800 1600 1200 900 600 300 100)
-config="./sourcesetr.config"
 instance="`date +%Y%m%d%H%M%S`"
 export_location=exports-"$instance"
 details="$export_location"/-sourcesetr.txt
+
 
 # Check if config file exists
 if [ -f "$config" ];
