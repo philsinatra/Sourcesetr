@@ -1,5 +1,5 @@
-[![GitHub tag](https://img.shields.io/github/tag/expressjs/express.svg)]()
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
+[![GitHub tag](https://img.shields.io/github/tag/philsinatra/Sourcesetr.svg?style=flat-square)]()
+[![license](https://img.shields.io/github/license/philsinatra/Sourcesetr.svg?style=flat-square)]()
 
 ![Sourcesetr logo](sourcesetr-logo.png)
 
