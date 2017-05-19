@@ -18,6 +18,27 @@ while getopts ":c" opt; do
       echo "**********************************************"
 
       read -p "SourceSetr Width Values: "  widthValues
+
+
+      #####################################################
+      # This example works stand alone:
+      #
+      # sizes=(1800 1600 1200 900 600 300 100)
+      #
+      # nums="300 460 1600 1200 900 600 300 100"
+      # sorted=`printf "%s\n" $nums | sort -rn`
+      # echo $sorted  # prints 1 2 3 4 5
+      #####################################################
+
+      #####################################################
+      # My tinkering
+      #
+      # echo "Width Values = $widthValues"
+      # sorted=`printf "%s\n" $widthValues | sort -rn`
+      # echo "Sorted Values = $sorted"
+      #####################################################
+
+
       echo "sizes=($widthValues)" > $config
       echo "sourcesetr.config established:"
       echo "sizes=($widthValues)"
