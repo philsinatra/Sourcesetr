@@ -2,6 +2,26 @@
 
 config="./sourcesetr.config"
 
+# NOTE (@philsinatra): Need to sort the input numeric values because
+# the HTML5 picture element sourceset requires the dimensions to be
+# coded in descending order.
+# REFERENCE: https://unix.stackexchange.com/questions/247655/how-to-create-a-function-that-can-sort-an-array-in-bash
+sort () {
+    for ((i=0; i <= $((${#arr[@]} - 2)); ++i))
+    do
+        for ((j=((i + 1)); j <= ((${#arr[@]} - 1)); ++j))
+        do
+            if [[ ${arr[i]} -lt ${arr[j]} ]]
+            then
+                # echo $i $j ${arr[i]} ${arr[j]}
+                tmp=${arr[i]}
+                arr[i]=${arr[j]}
+                arr[j]=$tmp
+            fi
+        done
+    done
+}
+
 while getopts ":c" opt; do
   case $opt in
     c)
@@ -17,31 +37,25 @@ while getopts ":c" opt; do
       echo "1200 600 300"
       echo "**********************************************"
 
-      read -p "SourceSetr Width Values: "  widthValues
+      read -p "SourceSetr Width Values: " -a arr
+      sort ${arr[@]}
+      # Show array length
+      # echo ${#arr[@]}
 
+      for i in ${arr[@]}
+      do
+        input_values="$input_values $i"
+      done
 
-      #####################################################
-      # This example works stand alone:
-      #
-      # sizes=(1800 1600 1200 900 600 300 100)
-      #
-      # nums="300 460 1600 1200 900 600 300 100"
-      # sorted=`printf "%s\n" $nums | sort -rn`
-      # echo $sorted  # prints 1 2 3 4 5
-      #####################################################
+      # NOTE (@philsinatra): Need to clean up the first instance of a space in
+      # the input values so the final output is formatted correctly.
+      # REFERENCE: https://stackoverflow.com/questions/5928156/replace-a-space-with-a-period-in-bash
+      clean_input_values=${input_values/ /}
 
-      #####################################################
-      # My tinkering
-      #
-      # echo "Width Values = $widthValues"
-      # sorted=`printf "%s\n" $widthValues | sort -rn`
-      # echo "Sorted Values = $sorted"
-      #####################################################
-
-
-      echo "sizes=($widthValues)" > $config
+      sizes="sizes=($clean_input_values)"
+      echo $sizes > $config
       echo "sourcesetr.config established:"
-      echo "sizes=($widthValues)"
+      echo "$sizes"
       echo ""
 
       exit 0

@@ -1,7 +1,7 @@
 {
   "name": "Sourcesetr",
   "description": "A bash shell script that batch exports image files to various sizes based on a configuration file. Useful for generating a source set of images from a single source file for responsive images techniques on the web.",
-  "version":"1.1.0",
+  "version":"1.1.1",
   "repository": {
     "type": "git",
     "url": "git@github.com:philsinatra/Sourcesetr.git"
